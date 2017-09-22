@@ -1,0 +1,15 @@
+NOTE:
+In the first step i.e. to convert the raw training and test data files into train.txt and test.txt ,
+I used the following files:
+
+- TRAIN_FILE.TXT for training
+- TEST_FILE_FULL.TXT for testing
+I didn't use TEST_FILE_CLEAN.TXT as it was creating problems in the embedding file as the dimensions of the 
+training and testing were different. 
+When I used TEST_FILE_CLEAN.TXT , everything worked fine except the fact that the embedding file corrupted.
+So to resolve that issue, we had to keep the dimensions of train.txt embeddings and test.txt embeddings same.
+More importantly my merge layer requires that the layers which it is merging i.e. the embedding layers 
+of test set and training set must be of same dimensions. That's why I used TEST_FILE_FULL.TXT.
+
+In this process , I have never used test dataset in training as you can check in the files or even run
+the whole program stack. The test set has only been used in the CNNtest.py file in which I am actually predicting the values of test set and computing accuracy by calculating the total number of matched values divided by the size of test daatset. 

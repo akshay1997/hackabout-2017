@@ -1,0 +1,23 @@
+Dependencies to be installed
+
+1)Tensorflow
+2)Keras
+3)h5py
+4)Scikit-learn
+5)Numpy
+6)itertools
+7)nltk
+8)gzip
+9)cPickle
+
+How to replicate the result?
+
+Download from https://levyomer.wordpress.com/2014/04/25/dependency-based-word-embeddings/ the deps.words.bz file and unzip it.
+1)Run CreateTrainTestFiles.py - python2 CreateTrainTestFiles.py
+2)Run preprocess.py - python2 preprocess.py
+3)Run CNNtrain.py - python2 CNNtrain.py
+4)Run CNNtest.py - python2 CNNtest.py
+
+This outputs the test set accuracy by comparing the produced outputs (output.txt) with the TEST_FILE_KEY.TXT .
+
+

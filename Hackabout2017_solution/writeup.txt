@@ -1,0 +1,37 @@
+I achieved an accuracy of 77.78% on the test set getting 2111 outputs correct out of 2717.
+I used a CNN network along with a merge layer . The network is explained below.
+
+
+1) The first step is to modify the train and test files in the following way:
+(Relation)  (e1 starting index) (e2 starting index) (sentence)
+eg: 
+Component-Whole(e2,e1)	12	15	The system as described above has its greatest application in an arrayed configuration of antenna elements .
+
+2) The second step requires the dependency based embeddings which is a slight modification to word2vec .
+This converts the sentences and the relations into one hot encodings on the basis of the dependency based word embeddings by Levy et al. These one hot encoding are in the form multidimensional binary arrays.
+The semantic relations are unzipped inside sem-relations.pkl.gz file. Basically all the semantic relations are stored in multidimensional integer arrays.
+And the word embeddings in embeddings.pkl.gz file.
+
+3) In the last step we merge the embeddings of relation and sentence and merge it together
+using merge layer and feed that to 1D convolutional layer using the 'tanh' activation function as it gave the 
+best accuracy among (Relu, sigmoid, tanh). Then we used max pooling to filter out the less important words
+and used a dropout of 0.20 as with less dropout it was overfitting. At last passed it through a fully connected softmax layer.
+
+First I used batch size = 32 and no. of epochs = 150. It was clearly overfitting.
+The validation loss was increasing as the batch size I took wasn't sufficient to update the weights 
+of the neurons while backpropagating. Hence I increased the batch size to 64. And after much tweaking I 
+change the no. of epochs to 110.
+
+I achieved an accuracy of 77.78% in the best case. Since the training dataset was too small, I opted for deep learning algos instead of machine learning algos. I first made the validation_split = 0.2 (meaning the training set is divided into 80-20).
+I observed that while the validation accuracy was continuosly increasing , the validation loss also 
+kept increasing. When I took validation as 0.2 my output accuracy was 76.48% on the test set.
+The reason for above could be that due to the hyperparameter optimization, the validation accuracy increases.
+But increase in the validation loss hints at slight overfitting. 
+
+So to prevent overfitting , and also increasing the accuracy on the test set I made the validation split almost non-existent(0.001). I did this because of 2 reasons:
+1) Decreasing the validation size would increase the training set size and hence it can give better accuracy 
+owing to larger dataset.
+2) Making validation split as 0.20 or more wouldn't help as it would only decrease the training dataset size
+which would result in overfitting.
+
+
